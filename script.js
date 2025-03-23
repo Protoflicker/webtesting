@@ -3,14 +3,20 @@ document.addEventListener("DOMContentLoaded", function () {
 
     links.forEach(link => {
         link.addEventListener("click", function (event) {
-            event.preventDefault();
+            event.preventDefault(); 
             
             const href = this.getAttribute("href");
 
-            document.body.style.opacity = 0; 
+            
+            document.body.classList.add("fade-out");
+
             setTimeout(() => {
                 window.location.href = href; 
-            }, 300); 
+            }, 500); 
         });
     });
+
+    setTimeout(() => {
+        document.body.style.opacity = "1";
+    }, 10);
 });
