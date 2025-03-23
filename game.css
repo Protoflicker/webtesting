@@ -1,6 +1,6 @@
 body {
     background-image: url('cloudsky008.jpg');
-    background-size: cover;
+    background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
     font-family: Arial, sans-serif;
@@ -8,20 +8,28 @@ body {
     margin: 0;
     display: flex;
     align-items: center;
-    flex-direction: column;
     min-height: 100vh;
-    opacity: 1;
+    flex-direction: column;
+    opacity: 0;
     transition: opacity 0.8s ease-in-out;
+}
+
+body.loaded {
+    opacity: 1;
+}
+
+body.fade-out {
+    opacity: 0;
+    transition: opacity 0.6s ease-in-out; 
 }
 
 /* Navbar */
 .navbar {
     width: 100%;
     display: flex;
-    justify-content: space-between; /* Distributes space between nav links & icons */
-    align-items: center; /* Ensures items stay aligned horizontally */
+    justify-content: center;
     background-color: gray;
-    padding: 10px 20px;
+    padding: 10px 0;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -33,7 +41,7 @@ body {
     text-align: center;
     text-decoration: none;
     font-size: 1.2rem;
-    margin: 0 10px;
+    margin: 0 20px;
     transition: background-color 0.3s ease;
 }
 
@@ -44,9 +52,14 @@ body {
 
 /* Social Media Icons */
 .social-icons {
-    display: flex; 
-    align-items: center; 
-    gap: 10px;
+    position: fixed;
+    top: 12px; 
+    right: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+    z-index: 1001;
+    padding: 5px 0; 
 }
 
 .social-icons a {
@@ -55,13 +68,9 @@ body {
 }
 
 .social-icons .icon {
-    width: 30px;
-    height: 30px;
+    width: 40px; 
+    height: 40px;
     transition: transform 0.3s;
-}
-
-.social-icons .icon:hover {
-    transform: scale(1.1);
 }
 
 /* Game Layout */
