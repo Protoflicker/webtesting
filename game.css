@@ -1,10 +1,9 @@
 body {
-    background-image: url('cloudsky008.jpg');
+    background-color: gray;
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
     font-family: Arial, sans-serif;
-    color: white;
     margin: 0;
     display: flex;
     align-items: center;
@@ -34,7 +33,7 @@ body.fade-out {
     z-index: 1000;
 }
 .status {
-    color: black;
+    color: white;
 }
 .navbar a {
     color: white;
@@ -129,7 +128,7 @@ body.fade-out {
 .description {
     margin-top: 5px; 
     font-size: 14px;
-    color: black; 
+    color: white; 
 }
 h1 {
     display: none;
