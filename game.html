@@ -3,32 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="home.css">
-    <title>Game</title>
+    <link rel="stylesheet" href="game.css">
+    <title>Turn-Based Game</title>
 </head>
 <body>
-
     <div class="navbar">
-        <a href="home.html" class="smooth-transition">Home</a>
-        <a href="cat.html" class="smooth-transition">Cat</a>
-        <a href="game.html" class="smooth-transition">Game</a>
-        <a href="#null2">Null2</a>
-        <div class="social-icons">
-            <a href="https://twitter.com/flashbacklog_" target="_blank">
-                <img src="x.png" alt="Twitter" class="icon">
-            </a>
-            <a href="https://discord.com/users/741490077133176845" target="_blank">
-                <img src="discord.png" alt="Discord" class="icon">
-            </a>
-            <a href="https://github.com/protoflicker" target="_blank">
-                <img src="github.png" alt="GitHub" class="icon">
-            </a>
-        </div>
+        <a href="home.html">Home</a>
+        <a href="cat.html">Cat</a>
+        <a href="game.html">Game</a>
+        <a href="#">Null2</a>
     </div>
 
+    <div class="game-container">
+        <div class="stickman-container">
+            <div id="player-stickman" class="stickman"></div>
+            <div id="enemy-stickman" class="stickman"></div>
+        </div>
 
-    <hr>
+        <div class="status">
+            <p id="player-hp">Player HP: 500</p>
+            <p id="enemy-hp">Enemy HP: 500</p>
+        </div>
 
+        <div class="controls">
+            <button onclick="attack()">Attack</button>
+            <button onclick="heal()">Heal</button>
+            <button onclick="focusAccuracy()">Focus</button>
+            <button onclick="tripleShot()">Triple Shot</button>
+            <button onclick="stun()">Stun</button>
+        </div>
+
+        <p id="log">Game Started!</p>
+    </div>
+
+    <script src="game.js"></script>
 </body>
 </html>
-<script src="game.js"></script>

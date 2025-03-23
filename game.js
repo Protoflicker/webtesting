@@ -1,170 +1,123 @@
-let player = {
-    hp: 500,
-    dmg: 50,
-    accuracy: 50,
-    crit: 20
-};
-
-let enemy = {
-    hp: 500,
-    dmg: 50,
-    accuracy: 50,
-    crit: 10
-};
-
-let playerTurn = true;
-let enemyStun = 0;
-let playerStun = 0;
-
-function logMessage(message) {
-    document.getElementById("log").innerHTML += `<p>${message}</p>`;
-}
-
-function updateStats() {
-    document.getElementById("player-hp").textContent = player.hp;
-    document.getElementById("player-accuracy").textContent = player.accuracy;
-    document.getElementById("player-crit").textContent = player.crit;
-    document.getElementById("enemy-hp").textContent = enemy.hp;
-}
+let playerHP = 500;
+let enemyHP = 500;
+let playerAccuracy = 50;
+let playerCrit = 20;
+let enemyAccuracy = 50;
+let enemyCrit = 10;
 
 function getRandomChance(percent) {
     return Math.random() * 100 < percent;
 }
 
 function attack() {
-    if (!playerTurn) return;
-    
-    let hit = getRandomChance(player.accuracy);
-    let crit = getRandomChance(player.crit);
+    let playerStickman = document.getElementById("player-stickman");
+    let enemyStickman = document.getElementById("enemy-stickman");
 
-    if (crit) {
-        enemy.hp -= player.dmg * 5;
-        logMessage("Critical hit! 5x damage!");
-    } else if (hit) {
-        enemy.hp -= player.dmg;
-        logMessage("Attack hit!");
+    playerStickman.classList.add("attacking");
+    setTimeout(() => playerStickman.classList.remove("attacking"), 300);
+
+    if (getRandomChance(playerCrit)) {
+        enemyHP -= 250;
+        logAction("Critical hit! 5x damage!");
+    } else if (getRandomChance(playerAccuracy)) {
+        enemyHP -= 50;
+        logAction("Attack hit!");
     } else {
-        logMessage("Attack missed!");
+        logAction("Attack missed!");
     }
 
-    endTurn();
+    enemyStickman.classList.add("damaged");
+    setTimeout(() => enemyStickman.classList.remove("damaged"), 300);
+
+    updateStatus();
+    enemyTurn();
 }
 
 function heal() {
-    if (!playerTurn) return;
-
-    let increase = Math.floor(Math.random() * (100 - 20 + 1)) + 20;
-    player.hp += increase;
-    logMessage(`Healed +${increase} HP`);
-
-    endTurn();
+    let healAmount = Math.floor(Math.random() * (100 - 20) + 20);
+    playerHP += healAmount;
+    logAction(`Healed +${healAmount} HP!`);
+    updateStatus();
+    enemyTurn();
 }
 
-function focus() {
-    if (!playerTurn) return;
-
-    let increase = Math.floor(Math.random() * (25 - 5 + 1)) + 5;
-    player.accuracy += increase;
-    logMessage(`Accuracy increased by +${increase}`);
-
-    endTurn();
+function focusAccuracy() {
+    let increase = Math.floor(Math.random() * (25 - 5) + 5);
+    playerAccuracy += increase;
+    logAction(`Accuracy increased by ${increase}!`);
+    updateStatus();
+    enemyTurn();
 }
 
 function tripleShot() {
-    if (!playerTurn) return;
+    let shots = [false, false, false];
+    let hitCount = 0;
+    
+    shots = shots.map(() => getRandomChance(playerAccuracy));
 
-    let hits = 0;
-    for (let i = 0; i < 3; i++) {
-        if (getRandomChance(player.accuracy)) hits++;
+    hitCount = shots.filter(hit => hit).length;
+
+    if (hitCount > 0) {
+        enemyHP -= hitCount * 50;
+        logAction(`Triple Shot hit ${hitCount} times!`);
+    } else {
+        logAction("Triple Shot missed!");
     }
 
-    enemy.hp -= player.dmg * hits;
-    logMessage(`Triple Shot: ${hits} shots hit`);
-
-    endTurn();
+    updateStatus();
+    enemyTurn();
 }
 
 function stun() {
-    if (!playerTurn) return;
-
     if (getRandomChance(50)) {
-        logMessage("Stun Success! Enemy skips 2 turns");
-        enemyStun = 2;
+        logAction("Enemy stunned! Skipping turn.");
     } else {
-        logMessage("Stun Failed! You skip 2 turns");
-        playerStun = 2;
+        logAction("Stun failed! Player skips next turn.");
+        enemyTurn();
     }
-
-    endTurn();
 }
 
 function enemyTurn() {
-    if (enemy.hp <= 0) {
-        logMessage("Enemy defeated! You win!");
-        return;
-    }
-
-    if (enemyStun > 0) {
-        logMessage("Enemy is stunned! Turn skipped.");
-        enemyStun--;
-        playerTurn = true;
-        return;
-    }
-
-    let actions = ["attack", "heal", "focus", "tripleShot"];
-    let action = actions[Math.floor(Math.random() * actions.length)];
-
-    if (action === "attack") {
-        let hit = getRandomChance(enemy.accuracy);
-        let crit = getRandomChance(enemy.crit);
-
-        if (crit) {
-            player.hp -= enemy.dmg * 5;
-            logMessage("Enemy Critical Hit! 5x damage!");
-        } else if (hit) {
-            player.hp -= enemy.dmg;
-            logMessage("Enemy Attack Hit!");
-        } else {
-            logMessage("Enemy Attack Missed!");
-        }
-    } else if (action === "heal") {
-        let increase = Math.floor(Math.random() * (100 - 20 + 1)) + 20;
-        enemy.hp += increase;
-        logMessage(`Enemy Healed +${increase} HP`);
-    } else if (action === "focus") {
-        let increase = Math.floor(Math.random() * (25 - 5 + 1)) + 5;
-        enemy.accuracy += increase;
-        logMessage(`Enemy Accuracy increased by +${increase}`);
-    } else if (action === "tripleShot") {
-        let hits = 0;
-        for (let i = 0; i < 3; i++) {
-            if (getRandomChance(enemy.accuracy)) hits++;
-        }
-
-        player.hp -= enemy.dmg * hits;
-        logMessage(`Enemy Triple Shot: ${hits} shots hit`);
-    }
-
-    playerTurn = true;
-    updateStats();
-
-    if (player.hp <= 0) {
-        logMessage("You have been defeated!");
-    }
-}
-
-function endTurn() {
-    updateStats();
-    playerTurn = false;
-
-    if (enemy.hp <= 0) {
-        logMessage("Enemy defeated! You win!");
-        return;
-    }
-
     setTimeout(() => {
-        enemyTurn();
+        let enemyStickman = document.getElementById("enemy-stickman");
+        let playerStickman = document.getElementById("player-stickman");
+
+        enemyStickman.classList.add("attacking");
+        setTimeout(() => enemyStickman.classList.remove("attacking"), 300);
+
+        if (getRandomChance(enemyCrit)) {
+            playerHP -= 250;
+            logAction("Enemy landed a critical hit!");
+        } else if (getRandomChance(enemyAccuracy)) {
+            playerHP -= 50;
+            logAction("Enemy attack hit!");
+        } else {
+            logAction("Enemy attack missed!");
+        }
+
+        playerStickman.classList.add("damaged");
+        setTimeout(() => playerStickman.classList.remove("damaged"), 300);
+
+        updateStatus();
+        checkGameOver();
     }, 1000);
 }
 
-updateStats();
+function updateStatus() {
+    document.getElementById("player-hp").innerText = `Player HP: ${playerHP}`;
+    document.getElementById("enemy-hp").innerText = `Enemy HP: ${enemyHP}`;
+}
+
+function checkGameOver() {
+    if (playerHP <= 0) {
+        alert("Game Over! You Lost.");
+        location.reload();
+    } else if (enemyHP <= 0) {
+        alert("You Win!");
+        location.reload();
+    }
+}
+
+function logAction(action) {
+    document.getElementById("log").innerText = action;
+}
