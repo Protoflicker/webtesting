@@ -171,17 +171,16 @@ img {
     border-radius: 10px;
     cursor: pointer;
     transition: 0.3s;
+    
+    -webkit-animation: pulsate-fwd 1.5s ease-in-out infinite both;
+    animation: pulsate-fwd 1.5s ease-in-out infinite both;
 }
 
 .meow-button:hover {
     background-color: white;
 }
 
-.pulsate-fwd {
-    -webkit-animation: pulsate-fwd 1.5s ease-in-out infinite both;
-    animation: pulsate-fwd 1.5s ease-in-out infinite both;
-}
-
+/* Pulsating Animation */
 @-webkit-keyframes pulsate-fwd {
   0% {
     -webkit-transform: scale(1);
@@ -210,6 +209,7 @@ img {
             transform: scale(1);
   }
 }
+
 
   
   
