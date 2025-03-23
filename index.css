@@ -30,7 +30,7 @@ th {
     width: 100%;
     display: flex;
     justify-content: center;
-    background-color: #132918;
+    background-color: gray;
     padding: 10px 0;
     position: sticky;
     top: 0;
@@ -43,7 +43,7 @@ th {
     text-align: center;
     text-decoration: none;
     font-size: 1.2rem;
-    margin: 0 10px;
+    margin: 0 20px;
     transition: background-color 0.3s ease;
 }
 
@@ -128,18 +128,18 @@ img {
     top: 10px;
     right: 10px;
     display: flex;
-    gap: 15px;
+    gap: 5px;
     z-index: 1001;
 }
 
 .social-icons .icon {
-    width: 30px; /* Adjust size as needed */
+    width: 30px; 
     height: 30px;
     transition: transform 0.3s;
 }
 
 .social-icons .icon:hover {
-    transform: scale(1.1); /* Slightly enlarges the icon on hover */
+    transform: scale(1.1); 
 }
 
   
