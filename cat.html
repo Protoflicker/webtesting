@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="index.css">
-    <title>SummerBlueSky</title>
+    <link rel="stylesheet" href="cat.css">
+    <title>Cat</title>
 </head>
 <body>
 
@@ -27,7 +27,19 @@
     </div>
     
   </div>
-  
+    
+  <button class="meow-button" onclick="playMeow()">Meow</button>
+
+    <!-- Audio (You will add your own sound file later) -->
+    <audio id="meow-sound">
+        <source src="miau.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        function playMeow() {
+            document.getElementById('meow-sound').play();
+        }
+    </script>
 
     <hr>
 
