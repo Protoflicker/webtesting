@@ -3,7 +3,7 @@ let enemyHP = 500;
 let playerAccuracy = 50;
 let playerCrit = 20;
 let enemyAccuracy = 50;
-let enemyCrit = 10;
+let enemyCrit = 20;
 
 function getRandomChance(percent) {
     return Math.random() * 100 < percent;
@@ -70,11 +70,19 @@ function tripleShot() {
 
 function stun() {
     if (getRandomChance(50)) {
-        logAction("Enemy stunned! Skipping turn.");
+        logAction("Enemy stunned! You get two extra turns!");
+        updateStatus();
+        setTimeout(() => playerTurn(), 1000); 
+        setTimeout(() => playerTurn(), 2000); 
     } else {
-        logAction("Stun failed! Player skips next turn.");
-        enemyTurn();
+        logAction("Stun failed! Enemy gets two turns.");
+        setTimeout(() => enemyTurn(), 1000); 
+        setTimeout(() => enemyTurn(), 2000); 
     }
+}
+
+function playerTurn() {
+    logAction("Your extra turn! Choose an action.");
 }
 
 function enemyTurn() {
@@ -106,6 +114,8 @@ function enemyTurn() {
 function updateStatus() {
     document.getElementById("player-hp").innerText = `Player HP: ${playerHP}`;
     document.getElementById("enemy-hp").innerText = `Enemy HP: ${enemyHP}`;
+    document.getElementById("player-accuracy").innerText = `Accuracy: ${playerAccuracy}%`;
+    document.getElementById("player-crit").innerText = `Crit Chance: ${playerCrit}%`;
 }
 
 function checkGameOver() {

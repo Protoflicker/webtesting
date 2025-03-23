@@ -59,28 +59,48 @@ body {
     margin-bottom: 20px;
 }
 
-.controls button {
-    margin: 5px;
+.controls {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+}
+
+.button-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 200px;
+}
+
+.button-container button {
     padding: 10px 15px;
     font-size: 1rem;
     cursor: pointer;
+    width: 100%;
 }
 
-@keyframes attack-animation {
-    0% { transform: translateX(0); }
-    50% { transform: translateX(20px); }
-    100% { transform: translateX(0); }
+.description {
+    font-size: 0.9rem;
+    color: #f1f1f1;
+    margin-top: 5px;
 }
 
-@keyframes damage-effect {
-    0% { background-color: red; }
-    100% { background-color: black; }
+.social-buttons {
+    margin-top: 20px;
 }
 
-.attacking {
-    animation: attack-animation 0.3s ease-in-out;
+.social-buttons a {
+    margin: 0 10px;
+    display: inline-block;
 }
 
-.damaged {
-    animation: damage-effect 0.3s;
+.social-buttons img {
+    width: 40px;
+    height: 40px;
+    transition: transform 0.2s;
+}
+
+.social-buttons img:hover {
+    transform: scale(1.1);
 }

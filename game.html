@@ -23,17 +23,51 @@
         <div class="status">
             <p id="player-hp">Player HP: 500</p>
             <p id="enemy-hp">Enemy HP: 500</p>
+            <p id="player-accuracy">Accuracy: 50%</p>
+            <p id="player-crit">Crit Chance: 20%</p>
         </div>
 
         <div class="controls">
-            <button onclick="attack()">Attack</button>
-            <button onclick="heal()">Heal</button>
-            <button onclick="focusAccuracy()">Focus</button>
-            <button onclick="tripleShot()">Triple Shot</button>
-            <button onclick="stun()">Stun</button>
+            <div class="button-container">
+                <button onclick="attack()">Attack</button>
+                <p class="description">Basic attack (20% crit chance for 5x damage)</p>
+            </div>
+
+            <div class="button-container">
+                <button onclick="heal()">Heal</button>
+                <p class="description">Restore HP (Random: 20-100 HP)</p>
+            </div>
+
+            <div class="button-container">
+                <button onclick="focusAccuracy()">Focus</button>
+                <p class="description">Increase accuracy (Boosts by 5-25%)</p>
+            </div>
+
+            <div class="button-container">
+                <button onclick="tripleShot()">Triple Shot</button>
+                <p class="description">Shoot 3 times (Each shot follows normal accuracy)</p>
+            </div>
+
+            <div class="button-container">
+                <button onclick="stun()">Stun</button>
+                <p class="description">50% chance to stun (Success: 2 extra turns, Fail: enemy gets 2 turns)</p>
+            </div>
         </div>
 
         <p id="log">Game Started!</p>
+
+        <!-- Social Buttons -->
+        <div class="social-buttons">
+            <a href="https://twitter.com/flashbacklog_" target="_blank">
+                <img src="twitter.png" alt="Twitter">
+            </a>
+            <a href="https://instagram.com/adiseptriansyah" target="_blank">
+                <img src="instagram.png" alt="Instagram">
+            </a>
+            <a href="https://github.com/protoflicker" target="_blank">
+                <img src="github.png" alt="GitHub">
+            </a>
+        </div>
     </div>
 
     <script src="game.js"></script>
