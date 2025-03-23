@@ -128,21 +128,21 @@ img {
     top: 10px;
     right: 10px;
     display: flex;
-    align-items: center; /* Ensure vertical alignment */
-    gap: 5px; /* Reduce space between icons */
+    align-items: center; 
+    gap: 10px; 
     z-index: 1001;
 }
 
 .social-icons a {
-    margin: 0; /* Remove extra margin */
-    padding: 0; /* Remove extra padding */
+    margin: 0; 
+    padding: 0; 
     display: flex;
     align-items: center;
 }
 
 .social-icons .icon {
-    width: 50px; /* Adjust size if necessary */
-    height: px;
+    width: 30px; 
+    height: 30px;
     transition: transform 0.3s;
 }
 
