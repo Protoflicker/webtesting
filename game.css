@@ -1,5 +1,5 @@
 body {
-    background-color: cyan;
+    background-color: #001f3f;
     background-size: 100% 100%;
     background-position: center;
     background-repeat: no-repeat;
@@ -94,7 +94,6 @@ body.fade-out {
 .stickman {
     width: 50px;
     height: 100px;
-    background-image: url('stickman.png');
     border-radius: 50%;
     position: relative;
     display: flex;
