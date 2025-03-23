@@ -141,8 +141,8 @@ img {
 }
 
 .social-icons .icon {
-    width: 25px; /* Adjust size if necessary */
-    height: 25px;
+    width: 50px; /* Adjust size if necessary */
+    height: px;
     transition: transform 0.3s;
 }
 
