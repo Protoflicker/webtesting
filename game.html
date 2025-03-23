@@ -71,17 +71,5 @@
 
     <script src="game.js"></script>
 
-    <!-- Force visibility if CSS fails -->
-    <script>
-        window.onload = function () {
-            document.body.style.opacity = "1"; // Force visible
-            document.querySelectorAll('*').forEach(el => {
-                el.style.opacity = "1";
-                el.style.visibility = "visible";
-                el.style.display = "block";
-            });
-            console.log("Force visibility applied.");
-        };
-    </script>
 </body>
 </html>
