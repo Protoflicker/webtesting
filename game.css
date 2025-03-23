@@ -93,6 +93,7 @@ body.fade-out {
 
 .stickman img {
     width: 80px;
+    filter: invert(1);
     height: auto; 
     border-radius: 50%;
     position: relative;
