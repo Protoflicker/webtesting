@@ -131,3 +131,7 @@ function checkGameOver() {
 function logAction(action) {
     document.getElementById("log").innerText = action;
 }
+
+document.addEventListener("DOMContentLoaded", function () {
+    document.body.classList.add("loaded"); // This ensures the fade-in effect works
+});
