@@ -133,5 +133,7 @@ function logAction(action) {
 }
 
 document.addEventListener("DOMContentLoaded", function () {
-    document.body.classList.add("loaded"); // This ensures the fade-in effect works
+    console.log("DOM fully loaded! Applying visibility fix.");
+    document.body.classList.add("loaded");
 });
+

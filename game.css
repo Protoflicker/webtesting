@@ -15,12 +15,12 @@ body {
 }
 
 body.loaded {
-    opacity: 1;
+    opacity: 1 !important;
 }
 
 body.fade-out {
     opacity: 0;
-    transition: opacity 0.6s ease-in-out; 
+    transition: opacity 0.6s ease-in-out;
 }
 
 .navbar {
@@ -60,10 +60,9 @@ body.fade-out {
     width: 100%;
     height: auto;
     padding: 20px;
-    background-color: rgba(255, 255, 255, 0.2); /* Light background to check visibility */
+    background-color: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
 }
-
 
 .stickman-container {
     display: flex;
@@ -117,13 +116,13 @@ body.fade-out {
 
 .social-icons {
     position: fixed;
-    top: 12px; 
+    top: 12px;
     right: 10px;
     display: flex;
     align-items: center;
-    gap: 10px; 
+    gap: 10px;
     z-index: 1001;
-    padding: 5px 0; 
+    padding: 5px 0;
 }
 
 .social-icons a {
@@ -134,9 +133,7 @@ body.fade-out {
 }
 
 .social-icons .icon {
-    width: 40px; 
+    width: 40px;
     height: 40px;
     transition: transform 0.3s;
 }
-
-
