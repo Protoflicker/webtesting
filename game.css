@@ -92,8 +92,8 @@ body.fade-out {
 }
 
 .stickman {
-    width: 50px;
-    height: 100px;
+    width: 30px;
+    height: 60px; 
     border-radius: 50%;
     position: relative;
     display: flex;
@@ -131,4 +131,8 @@ body.fade-out {
 }
 h1 {
     display: none;
+}
+
+#log {
+    color: white;
 }
