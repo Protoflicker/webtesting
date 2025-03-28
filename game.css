@@ -138,3 +138,9 @@ h1 {
     color: white;
 }
 
+.disabled {
+    pointer-events: none; 
+    cursor: default; 
+    color: gray;
+    opacity: 0.6; 
+}

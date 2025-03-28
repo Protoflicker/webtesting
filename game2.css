@@ -43,9 +43,10 @@ th {
     justify-content: center;
     background-color: gray;
     padding: 10px 0;
-    position: sticky;
+    z-index: 1001 !important;
+    position: fixed;
     top: 0;
-    z-index: 1000;
+
 }
 
 .navbar a {
@@ -186,9 +187,10 @@ img {
     width: 510px;
     margin: 20px auto;
     border: 3px solid white; 
-    background-color: #222; 
+    background-color: #444 !important;
     position: relative;
 }
+
 
 .cell {
     width: 50px;

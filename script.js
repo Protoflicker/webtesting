@@ -20,3 +20,9 @@ document.addEventListener("DOMContentLoaded", function () {
         document.body.style.opacity = "1";
     }, 10);
 });
+
+document.addEventListener("DOMContentLoaded", () => {
+    document.body.classList.add("loaded"); 
+    createBoard(); 
+});
+
