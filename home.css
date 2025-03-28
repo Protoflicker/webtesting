@@ -171,7 +171,12 @@ img {
     text-align: right; 
 }
 
-
+.disabled {
+    pointer-events: none; 
+    cursor: default; 
+    color: gray;
+    opacity: 0.6; 
+}
   
   
   

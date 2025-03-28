@@ -4,40 +4,211 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="home.css">
-    <title>SummerBlueSky</title>
+    <title>SummerBlueSky - Snakes and Ladders</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+        }
+        .board {
+            display: grid;
+            grid-template-columns: repeat(10, 50px);
+            grid-template-rows: repeat(10, 50px);
+            gap: 1px;
+            width: 510px;
+            margin: 20px auto;
+            border: 2px solid black;
+            position: relative;
+        }
+        .cell {
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ccc;
+            font-size: 14px;
+            position: relative;
+            background-color: #f0f0f0;
+        }
+        .player {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            position: absolute;
+        }
+        .red { background-color: red; }
+        .blue { background-color: blue; }
+        .green { background-color: green; }
+        .yellow { background-color: yellow; }
+        .snake { background-color: black; width: 20px; height: 20px; }
+        .ladder { background-color: red; width: 20px; height: 20px; }
+        .navbar {
+            background: #333;
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        .social-icons {
+            display: flex;
+            gap: 10px;
+        }
+        .icon {
+            width: 20px;
+            height: 20px;
+        }
+    </style>
 </head>
 <body>
+
     <script>
         if (window.location.pathname === "/webtesting/") {
             window.location.href = "/webtesting/home.html";
         }
     </script>
-    
-
 
     <div class="navbar">
-        <a href="home.html" class="smooth-transition">Home</a>
-        <a href="cat.html" class="smooth-transition">Cat</a>
-        <a href="game.html" class="smooth-transition">Game</a>
-        <a class="smooth-transition disabled">Game2</a>
-    <div class="social-icons">
-        <a href="https://twitter.com/flashbacklog_" target="_blank">
-            <img src="assets/x.png" alt="Twitter" class="icon">
-        </a>
-        <a href="https://discord.com/users/741490077133176845" target="_blank">
-            <img src="assets/discord.png" alt="Discord" class="icon">
-        </a>
-        <a href="https://github.com/protoflicker" target="_blank">
-            <img src="assets/github.png" alt="GitHub" class="icon">
-        </a>
+        <div>
+            <a href="home.html" class="smooth-transition">Home</a>
+            <a href="cat.html" class="smooth-transition">Cat</a>
+            <a href="game.html" class="smooth-transition">Game</a>
+            <a class="smooth-transition disabled">Game2</a>
+        </div>
+        <div class="social-icons">
+            <a href="https://twitter.com/flashbacklog_" target="_blank">
+                <img src="assets/x.png" alt="Twitter" class="icon">
+            </a>
+            <a href="https://discord.com/users/741490077133176845" target="_blank">
+                <img src="assets/discord.png" alt="Discord" class="icon">
+            </a>
+            <a href="https://github.com/protoflicker" target="_blank">
+                <img src="assets/github.png" alt="GitHub" class="icon">
+            </a>
+        </div>
     </div>
-    
-  </div>
-  <p class="quote">in progress</p>
 
+    <h1>🎲 Snakes and Ladders 🎲</h1>
+    <div class="board" id="board"></div>
 
-    <hr>
+    <button onclick="playTurn()">Roll Dice 🎲</button>
+    <p id="result"></p>
+
+    <script>
+        const snakes = { 17: 7, 54: 34, 62: 19, 98: 79 };
+        const ladders = { 3: 22, 8: 26, 28: 84, 58: 77 };
+
+        class Player {
+            constructor(name, color) {
+                this.name = name;
+                this.color = color;
+                this.position = 1;
+                this.token = document.createElement("div");
+                this.token.classList.add("player", color);
+                document.getElementById("board").appendChild(this.token);
+                this.updatePosition();
+            }
+
+            rollDice() {
+                return Math.floor(Math.random() * 6) + 1;
+            }
+
+            move() {
+                const steps = this.rollDice();
+                let newPosition = this.position + steps;
+
+                if (newPosition > 100) {
+                    newPosition = this.position;
+                }
+
+                if (snakes[newPosition]) {
+                    newPosition = snakes[newPosition];
+                } else if (ladders[newPosition]) {
+                    newPosition = ladders[newPosition];
+                }
+
+                this.position = newPosition;
+                this.updatePosition();
+                return steps;
+            }
+
+            updatePosition() {
+                const boardCells = document.querySelectorAll(".cell");
+                const cellIndex = 100 - this.position;
+                const cell = boardCells[cellIndex];
+                if (cell) {
+                    this.token.style.top = cell.offsetTop + "px";
+                    this.token.style.left = cell.offsetLeft + "px";
+                }
+            }
+        }
+
+        class RedPlayer extends Player { constructor(name = "Red Player") { super(name, "red"); } }
+        class BluePlayer extends Player { constructor(name = "Blue Player") { super(name, "blue"); } }
+        class GreenPlayer extends Player { constructor(name = "Green Player") { super(name, "green"); } }
+        class YellowPlayer extends Player { constructor(name = "Yellow Player") { super(name, "yellow"); } }
+
+        function createBoard() {
+            const board = document.getElementById("board");
+            board.innerHTML = "";
+
+            for (let i = 100; i >= 1; i--) {
+                let cell = document.createElement("div");
+                cell.classList.add("cell");
+                cell.innerText = i;
+                board.appendChild(cell);
+
+                if (snakes[i]) {
+                    let snakeToken = document.createElement("div");
+                    snakeToken.classList.add("snake");
+                    cell.appendChild(snakeToken);
+                }
+
+                if (ladders[i]) {
+                    let ladderToken = document.createElement("div");
+                    ladderToken.classList.add("ladder");
+                    cell.appendChild(ladderToken);
+                }
+            }
+        }
+
+        const players = [
+            new RedPlayer(),
+            new BluePlayer(),
+            new GreenPlayer(),
+            new YellowPlayer()
+        ];
+
+        let currentPlayerIndex = 0;
+
+        function playTurn() {
+            const player = players[currentPlayerIndex];
+            const steps = player.move();
+            let message = `${player.name} rolled a ${steps} and moved to position ${player.position}`;
+
+            if (snakes[player.position]) {
+                message += ` 🐍 Oh no! Hit a snake, moved down to ${player.position}`;
+            } else if (ladders[player.position]) {
+                message += ` 🪜 Nice! Climbed a ladder to ${player.position}`;
+            }
+
+            document.getElementById("result").innerText = message;
+
+            if (player.position === 100) {
+                alert(`${player.name} WINS! 🎉`);
+                return;
+            }
+
+            currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
+        }
+
+        createBoard();
+    </script>
 
 </body>
 </html>
-<script src="script.js"></script>
